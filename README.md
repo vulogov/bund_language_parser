@@ -70,7 +70,7 @@ Another form of string is literal, that is sequence of ANY characters enclosed i
 
 ## Function calls
 
-References to functions that have to be immediately executed defined by the following rule ```( ASCII_ALPHA | "." | "," | "=" | ">" | "<" | "-" | "+" | "^" | "?" | "!" )+```
+References to functions that have to be immediately executed defined by the following rule ```( LETTER | SYMBOL | "." | "," | "=" | ">" | "<" | "-" | "+" | "^" | "?" | "!" )+```
 
 ```rust
 "Hello world!" println // This is call for execution of function "println"
