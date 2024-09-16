@@ -5,13 +5,20 @@ terms = _{ term* }
 term = _{ value }
 
 value   = _{
+  string |
+  literal |
   float |
   integer
 }
 
 integer = @{ ("+" | "-")? ~ int }
 float   = @{ ("+" | "-")? ~ int ~ "." ~ ( digits ~ exp? | exp)? }
+string             = @{ "\"" ~ inner ~ "\"" }
+literal            = @{ "'" ~ (!"'" ~ ANY)* ~ "'" }
 
+inner   = @{ (!("\"" | "\\" | "\u{0000}" | "\u{001F}") ~ ANY)* ~ (escape ~ inner)? }
+escape  = @{ "\\" ~ ("b" | "t" | "n" | "f" | "r" | "\"" | "\\" | unicode | NEWLINE)? }
+unicode = @{ "u" ~ ASCII_HEX_DIGIT{4} | "U" ~ ASCII_HEX_DIGIT{8} }
 int     = @{ "0" | (ASCII_NONZERO_DIGIT ~ digits?) }
 digits  = @{ (ASCII_DIGIT | ("_" ~ ASCII_DIGIT))+ }
 exp     = @{ ("E" | "e") ~ ("+" | "-")? ~ int }

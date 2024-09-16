@@ -14,6 +14,12 @@ pub fn parse_pair(p: pest::iterators::Pair<Rule>) -> Result<Value, Error> {
         Rule::float => {
             return float::process_token(&p, &token.as_str().to_string());
         }
+        Rule::string => {
+            return string::process_token(&p, &token.as_str().to_string());
+        }
+        Rule::literal => {
+            return literal::process_token(&p, &token.as_str().to_string());
+        }
         Rule::EOI => {
             return eoi::process_token(&p, &token.as_str().to_string());
         }
