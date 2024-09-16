@@ -34,7 +34,6 @@ mod tests {
     #[test]
     fn test_parse_hello_world2() {
         let res = bund_parse(TEST2).expect("Fail to parse BUND");
-        println!("{:?}", &res);
         assert_eq!(res[1].cast_string().unwrap(), "println");
     }
 
