@@ -1,0 +1,21 @@
+program = _{ SOI ~ terms ~ EOI }
+
+terms = _{ term* }
+
+term = _{ value }
+
+value   = _{
+  float |
+  integer
+}
+
+integer = @{ ("+" | "-")? ~ int }
+float   = @{ ("+" | "-")? ~ int ~ "." ~ ( digits ~ exp? | exp)? }
+
+int     = @{ "0" | (ASCII_NONZERO_DIGIT ~ digits?) }
+digits  = @{ (ASCII_DIGIT | ("_" ~ ASCII_DIGIT))+ }
+exp     = @{ ("E" | "e") ~ ("+" | "-")? ~ int }
+
+WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
+
+COMMENT = _{ "//" ~ (!"\n" ~ ANY)* }

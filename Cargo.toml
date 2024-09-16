@@ -4,4 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+easy-error = "1.0.0"
+lexical-core = "1.0.1"
+log = "0.4.22"
+pest = "2.7.12"
+pest_derive = "2.7.12"
 rust_dynamic = ">=0.20.*"
