@@ -6,5 +6,6 @@ pub mod atom;
 pub mod name;
 pub mod ptr;
 pub mod command;
+pub mod lambda;
 pub mod eoi;
 pub mod unknown;

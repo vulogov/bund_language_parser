@@ -5,6 +5,7 @@ terms = _{ term* }
 term = _{ value }
 
 value   = _{
+  lambda |
   name |
   ptr |
   command |
@@ -23,9 +24,10 @@ atom    = @{ ":" ~ ASCII_ALPHANUMERIC+ ~ WHITESPACE+ }
 name    = @{ element+ }
 ptr     = @{ "`" ~ element+ ~ WHITESPACE+ }
 command = @{ cmd+ ~ WHITESPACE+ }
+lambda  = { "{" ~ term+ ~ "}" }
 
 
-element = @{ ( ASCII_ALPHA | "." | "," | "=" | ">" | "<" | "-" | "+" | "^" ) }
+element = @{ ( ASCII_ALPHA | "." | "," | "=" | ">" | "<" | "-" | "+" | "^" | "?" | "!" ) }
 cmd     = @{ ( ":" | ";" ) }
 inner   = @{ (!("\"" | "\\" | "\u{0000}" | "\u{001F}") ~ ANY)* ~ (escape ~ inner)? }
 escape  = @{ "\\" ~ ("b" | "t" | "n" | "f" | "r" | "\"" | "\\" | unicode | NEWLINE)? }
