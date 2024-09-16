@@ -2,6 +2,9 @@
 name = "bund_language_parser"
 version = "0.1.0"
 edition = "2021"
+description = "BUND programming language parser"
+license-file = "LICENSE"
+repository = "https://github.com/vulogov/bund_language_parser"
 
 [dependencies]
 easy-error = "1.0.0"
