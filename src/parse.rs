@@ -23,6 +23,15 @@ pub fn parse_pair(p: pest::iterators::Pair<Rule>) -> Result<Value, Error> {
         Rule::atom => {
             return atom::process_token(&p, &token.as_str().to_string());
         }
+        Rule::name => {
+            return name::process_token(&p, &token.as_str().to_string());
+        }
+        Rule::ptr => {
+            return ptr::process_token(&p, &token.as_str().to_string());
+        }
+        Rule::command => {
+            return command::process_token(&p, &token.as_str().to_string());
+        }
         Rule::EOI => {
             return eoi::process_token(&p, &token.as_str().to_string());
         }

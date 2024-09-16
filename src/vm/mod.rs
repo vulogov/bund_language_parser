@@ -3,5 +3,8 @@ pub mod float;
 pub mod string;
 pub mod literal;
 pub mod atom;
+pub mod name;
+pub mod ptr;
+pub mod command;
 pub mod eoi;
 pub mod unknown;
