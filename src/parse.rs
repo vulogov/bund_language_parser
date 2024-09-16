@@ -20,6 +20,9 @@ pub fn parse_pair(p: pest::iterators::Pair<Rule>) -> Result<Value, Error> {
         Rule::literal => {
             return literal::process_token(&p, &token.as_str().to_string());
         }
+        Rule::atom => {
+            return atom::process_token(&p, &token.as_str().to_string());
+        }
         Rule::EOI => {
             return eoi::process_token(&p, &token.as_str().to_string());
         }

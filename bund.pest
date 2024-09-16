@@ -5,6 +5,7 @@ terms = _{ term* }
 term = _{ value }
 
 value   = _{
+  atom |
   string |
   literal |
   float |
@@ -13,8 +14,9 @@ value   = _{
 
 integer = @{ ("+" | "-")? ~ int }
 float   = @{ ("+" | "-")? ~ int ~ "." ~ ( digits ~ exp? | exp)? }
-string             = @{ "\"" ~ inner ~ "\"" }
-literal            = @{ "'" ~ (!"'" ~ ANY)* ~ "'" }
+string  = @{ "\"" ~ inner ~ "\"" }
+literal = @{ "'" ~ (!"'" ~ ANY)* ~ "'" }
+atom    = @{ ":" ~ ASCII_ALPHANUMERIC+ ~ WHITESPACE+ }
 
 inner   = @{ (!("\"" | "\\" | "\u{0000}" | "\u{001F}") ~ ANY)* ~ (escape ~ inner)? }
 escape  = @{ "\\" ~ ("b" | "t" | "n" | "f" | "r" | "\"" | "\\" | unicode | NEWLINE)? }

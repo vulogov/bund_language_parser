@@ -14,6 +14,14 @@ const TEST4S: &str = r#"
 42 '42' 42.0
 "#;
 
+const TEST5S: &str = r#"
+:HELLO
+"#;
+
+const TEST6S: &str = r#"
+:HELLO :WORLD "Oh, dear!"
+"#;
+
 #[cfg(test)]
 mod tests {
     #![allow(unused_imports)]
@@ -43,6 +51,18 @@ mod tests {
     fn test_parse_multiple_literals() {
         let res = bund_parse(TEST4S).expect("Fail to parse BUND string");
         assert_eq!(res[1].cast_string().unwrap(), "42");
+    }
+
+    #[test]
+    fn test_parse_single_atom() {
+        let res = bund_parse(TEST5S).expect("Fail to parse BUND string");
+        assert_eq!(res[0].cast_string().unwrap(), "HELLO");
+    }
+
+    #[test]
+    fn test_parse_second_atom() {
+        let res = bund_parse(TEST6S).expect("Fail to parse BUND string");
+        assert_eq!(res[1].cast_string().unwrap(), "WORLD");
     }
 
 }
