@@ -100,3 +100,11 @@ Anything that is included between "{" and "}" is defined as the body of lambda f
 ```rust
 { 1 2 42.0 :Hello `println ! }
 ```
+
+## List
+
+Anything that is included between "[" and "]" is defined as the content of the list value
+
+```rust
+[ 1 2 42.0 :Hello `println ! ]
+```

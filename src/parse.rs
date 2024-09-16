@@ -35,6 +35,9 @@ pub fn parse_pair(p: pest::iterators::Pair<Rule>) -> Result<Value, Error> {
         Rule::lambda => {
             return lambda::process_token(&p, &token.as_str().to_string());
         }
+        Rule::list => {
+            return list::process_token(&p, &token.as_str().to_string());
+        }
         Rule::EOI => {
             return eoi::process_token(&p, &token.as_str().to_string());
         }
