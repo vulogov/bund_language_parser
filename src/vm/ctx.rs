@@ -6,16 +6,16 @@ use rust_dynamic::value::Value;
 use easy_error::{Error, bail};
 
 pub fn process_token(p: &pest::iterators::Pair<Rule>, _t: &String, state: &mut Vec<Value>) -> Result<Value, Error> {
-    let mut res: Vec<Value> = Vec::new();
+    state.push(Value::context());
     for pair in p.clone().into_inner() {
         match parse_pair(pair, state) {
             Ok(value) => {
-                res.push(value)
+                state.push(value)
             }
             Err(err) => {
                 bail!("{}", err);
             }
         }
     }
-    Ok(Value::from_list(res))
+    Ok(Value::call("endcontext".to_string(), Vec::new()))
 }

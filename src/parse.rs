@@ -4,7 +4,7 @@ use crate::vm::*;
 use rust_dynamic::value::Value;
 use easy_error::{Error};
 
-pub fn parse_pair(p: pest::iterators::Pair<Rule>) -> Result<Value, Error> {
+pub fn parse_pair(p: pest::iterators::Pair<Rule>, state: &mut Vec<Value>) -> Result<Value, Error> {
     let rule  = &p.as_rule();
     let token = &p.as_span();
     match rule {
@@ -33,10 +33,13 @@ pub fn parse_pair(p: pest::iterators::Pair<Rule>) -> Result<Value, Error> {
             return command::process_token(&p, &token.as_str().to_string());
         }
         Rule::lambda => {
-            return lambda::process_token(&p, &token.as_str().to_string());
+            return lambda::process_token(&p, &token.as_str().to_string(), state);
         }
         Rule::list => {
-            return list::process_token(&p, &token.as_str().to_string());
+            return list::process_token(&p, &token.as_str().to_string(), state);
+        }
+        Rule::ctx => {
+            return ctx::process_token(&p, &token.as_str().to_string(), state);
         }
         Rule::EOI => {
             return eoi::process_token(&p, &token.as_str().to_string());

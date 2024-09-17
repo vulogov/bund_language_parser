@@ -108,3 +108,11 @@ Anything that is included between "[" and "]" is defined as the content of the l
 ```rust
 [ 1 2 42.0 :Hello `println ! ]
 ```
+
+## Execution in separate context
+
+Anything enclosed between "(" and ")" will be stored in separate anonymous stack. Stack will be deleted upon receiving ")" command.
+
+```rust
+( 42 . )  // I am placing 42 in a separate context, but then move it to a Workbench stack
+```

@@ -17,7 +17,7 @@ pub fn bund_parse(source: &str) -> Result<Vec<Value>, Error> {
     match pairs {
         Ok(ast_pairs) => {
             for pair in ast_pairs {
-                match parse::parse_pair(pair) {
+                match parse::parse_pair(pair, &mut res) {
                     Ok(value) => {
                         res.push(value);
                     }

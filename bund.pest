@@ -7,6 +7,7 @@ term = _{ value }
 value   = _{
   lambda |
   list |
+  ctx |
   ptr |
   name |
   command |
@@ -22,11 +23,12 @@ float   = @{ ("+" | "-")? ~ int ~ "." ~ ( digits ~ exp? | exp)? }
 string  = @{ "\"" ~ inner ~ "\"" }
 literal = @{ "'" ~ (!"'" ~ ANY)* ~ "'" }
 atom    = @{ ":" ~ ASCII_ALPHANUMERIC+ ~ WHITESPACE+ }
-name    = @{ element+ }
+name    = @{ !"`" ~ element+ ~ WHITESPACE+ }
 ptr     = @{ "`" ~ element+ ~ WHITESPACE+ }
 command = @{ cmd+ ~ WHITESPACE+ }
 lambda  = { "{" ~ term+ ~ "}" }
 list    = { "[" ~ term+ ~ "]" }
+ctx     = { "(" ~ term+ ~ ")" }
 
 
 element = @{ ( LETTER | SYMBOL | "." | "," | "=" | ">" | "<" | "-" | "+" | "^" | "?" | "!" ) }
