@@ -9,5 +9,6 @@ pub mod command;
 pub mod lambda;
 pub mod list;
 pub mod ctx;
+pub mod stack;
 pub mod eoi;
 pub mod unknown;

@@ -12,6 +12,7 @@ value   = _{
   name |
   command |
   atom |
+  stack |
   string |
   literal |
   float |
@@ -23,6 +24,7 @@ float   = @{ ("+" | "-")? ~ int ~ "." ~ ( digits ~ exp? | exp)? }
 string  = @{ "\"" ~ inner ~ "\"" }
 literal = @{ "'" ~ (!"'" ~ ANY)* ~ "'" }
 atom    = @{ ":" ~ ASCII_ALPHANUMERIC+ ~ WHITESPACE+ }
+stack   = @{ "@" ~ LETTER+ ~ WHITESPACE+ }
 name    = @{ !"`" ~ element+ ~ WHITESPACE+ }
 ptr     = @{ "`" ~ element+ ~ WHITESPACE+ }
 command = @{ cmd+ ~ WHITESPACE+ }
@@ -31,7 +33,7 @@ list    = { "[" ~ term+ ~ "]" }
 ctx     = { "(" ~ term+ ~ ")" }
 
 
-element = @{ ( LETTER | SYMBOL | "." | "," | "=" | ">" | "<" | "-" | "+" | "^" | "?" | "!" ) }
+element = @{ ( LETTER | SYMBOL | "." | "," | "=" | ">" | "<" | "-" | "+" | "^" | "?" | "!" | "/" | "*" ) }
 cmd     = @{ ( ":" | ";" ) }
 inner   = @{ (!("\"" | "\\" | "\u{0000}" | "\u{001F}") ~ ANY)* ~ (escape ~ inner)? }
 escape  = @{ "\\" ~ ("b" | "t" | "n" | "f" | "r" | "\"" | "\\" | unicode | NEWLINE)? }

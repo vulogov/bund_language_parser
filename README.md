@@ -70,7 +70,7 @@ Another form of string is literal, that is sequence of ANY characters enclosed i
 
 ## Function calls
 
-References to functions that have to be immediately executed defined by the following rule ```( LETTER | SYMBOL | "." | "," | "=" | ">" | "<" | "-" | "+" | "^" | "?" | "!" )+```
+References to functions that have to be immediately executed defined by the following rule ```( LETTER | SYMBOL | "." | "," | "=" | ">" | "<" | "-" | "+" | "^" | "?" | "!" | "/" | "*")+```
 
 ```rust
 "Hello world!" println // This is call for execution of function "println"
@@ -107,6 +107,14 @@ Anything that is included between "[" and "]" is defined as the content of the l
 
 ```rust
 [ 1 2 42.0 :Hello `println ! ]
+```
+
+## Reference to named stack.
+
+If you prepend any Unicode string that doesn't contains spaces with symbol "@", Bund parser will interpret this as a reference to named stack.
+
+```rust
+@Stackname
 ```
 
 ## Execution in separate context

@@ -41,6 +41,9 @@ pub fn parse_pair(p: pest::iterators::Pair<Rule>, state: &mut Vec<Value>) -> Res
         Rule::ctx => {
             return ctx::process_token(&p, &token.as_str().to_string(), state);
         }
+        Rule::stack => {
+            return stack::process_token(&p, &token.as_str().to_string());
+        }
         Rule::EOI => {
             return eoi::process_token(&p, &token.as_str().to_string());
         }
