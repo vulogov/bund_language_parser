@@ -19,7 +19,7 @@ value   = _{
   integer
 }
 
-integer = @{ ("+" | "-")? ~ int }
+integer = @{ ("+" | "-")? ~ int ~ ( stack )? }
 float   = @{ ("+" | "-")? ~ int ~ "." ~ ( digits ~ exp? | exp)? }
 string  = @{ "\"" ~ inner ~ "\"" }
 literal = @{ "'" ~ (!"'" ~ ANY)* ~ "'" }

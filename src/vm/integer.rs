@@ -4,7 +4,7 @@ use crate::Rule;
 use rust_dynamic::value::Value;
 use easy_error::{Error, bail};
 
-pub fn process_token(_p: &pest::iterators::Pair<Rule>, t: &String) -> Result<Value, Error> {
+pub fn process_token(p: &pest::iterators::Pair<Rule>, t: &String) -> Result<Value, Error> {
     let num: Result<i64, lexical_core::Error> = lexical_core::parse(t.as_bytes());
     match num {
         Ok(num_value) => {
@@ -14,5 +14,4 @@ pub fn process_token(_p: &pest::iterators::Pair<Rule>, t: &String) -> Result<Val
             bail!("Error converting INT to VALUE: {}", err);
         }
     }
-
 }
