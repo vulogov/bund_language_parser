@@ -22,6 +22,14 @@ const TEST6S: &str = r#"
 :HELLO :WORLD "Oh, dear!"
 "#;
 
+const TEST7S: &str = r#"
+:ПриветМир
+"#;
+
+const TEST8S: &str = r#"
+"Отведай ещё этих французских булок"
+"#;
+
 #[cfg(test)]
 mod tests {
     #![allow(unused_imports)]
@@ -54,9 +62,15 @@ mod tests {
     }
 
     #[test]
-    fn test_parse_single_atom() {
+    fn test_parse_single_atom1() {
         let res = bund_parse(TEST5S).expect("Fail to parse BUND string");
         assert_eq!(res[0].cast_string().unwrap(), "HELLO");
+    }
+
+    #[test]
+    fn test_parse_single_atom2() {
+        let res = bund_parse(TEST7S).expect("Fail to parse BUND string");
+        assert_eq!(res[0].cast_string().unwrap(), "ПриветМир");
     }
 
     #[test]
@@ -65,4 +79,9 @@ mod tests {
         assert_eq!(res[1].cast_string().unwrap(), "WORLD");
     }
 
+    #[test]
+    fn test_parse_unicode_string() {
+        let res = bund_parse(TEST8S).expect("Fail to parse BUND string");
+        assert_eq!(res[0].cast_string().unwrap(), "Отведай ещё этих французских булок");
+    }
 }

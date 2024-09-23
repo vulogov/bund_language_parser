@@ -23,7 +23,7 @@ integer = @{ ("+" | "-")? ~ int }
 float   = @{ ("+" | "-")? ~ int ~ "." ~ ( digits ~ exp? | exp)? }
 string  = @{ "\"" ~ inner ~ "\"" }
 literal = @{ "'" ~ (!"'" ~ ANY)* ~ "'" }
-atom    = @{ ":" ~ ASCII_ALPHANUMERIC+ ~ WHITESPACE+ }
+atom    = @{ ":" ~ aelement+ ~ WHITESPACE+ }
 stack   = @{ "@" ~ LETTER+ ~ WHITESPACE+ }
 name    = @{ !"`" ~ element+ ~ WHITESPACE+ }
 ptr     = @{ "`" ~ element+ ~ WHITESPACE+ }
@@ -34,6 +34,7 @@ ctx     = { "(" ~ term+ ~ ")" }
 
 
 element = @{ ( LETTER | SYMBOL | "." | "," | "=" | ">" | "<" | "-" | "+" | "^" | "?" | "!" | "/" | "*" | "|" | "&" | "#" | "%" ) }
+aelement= @{ (ASCII_ALPHANUMERIC | LETTER) }
 cmd     = @{ ( ":" | ";" ) }
 inner   = @{ (!("\"" | "\\" | "\u{0000}" | "\u{001F}") ~ ANY)* ~ (escape ~ inner)? }
 escape  = @{ "\\" ~ ("b" | "t" | "n" | "f" | "r" | "\"" | "\\" | unicode | NEWLINE)? }
