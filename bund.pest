@@ -33,7 +33,7 @@ list    = { "[" ~ term+ ~ "]" }
 ctx     = { "(" ~ term+ ~ ")" }
 
 
-element = @{ ( LETTER | SYMBOL | "." | "," | "=" | ">" | "<" | "-" | "+" | "^" | "?" | "!" | "/" | "*" | "|" | "&" | "#" | "%" ) }
+element = @{ ( LETTER | SYMBOL | "." | "," | "=" | ">" | "<" | "-" | "+" | "^" | "?" | "!" | "/" | "*" | "|" | "&" | "#" | "%" | "_" ) }
 aelement= @{ (ASCII_ALPHANUMERIC | LETTER) }
 cmd     = @{ ( ":" | ";" ) }
 inner   = @{ (!("\"" | "\\" | "\u{0000}" | "\u{001F}") ~ ANY)* ~ (escape ~ inner)? }

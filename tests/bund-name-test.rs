@@ -34,6 +34,10 @@ const TEST9N: &str = r#"
 λ 1 2 3
 "#;
 
+const TEST10N: &str = r#"
+HELLO_WORLD
+"#;
+
 #[cfg(test)]
 mod tests {
     #![allow(unused_imports)]
@@ -99,6 +103,12 @@ mod tests {
     fn test_parse_name_symbol() {
         let res = bund_parse(TEST9N).expect("Fail to parse BUND name");
         assert_eq!(res[0].cast_string().unwrap(), "λ");
+    }
+
+    #[test]
+    fn test_parse_name_with_undescore_symbol() {
+        let res = bund_parse(TEST10N).expect("Fail to parse BUND name");
+        assert_eq!(res[0].cast_string().unwrap(), "HELLO_WORLD");
     }
 
 }
