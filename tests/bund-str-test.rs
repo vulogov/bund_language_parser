@@ -30,6 +30,10 @@ const TEST8S: &str = r#"
 "Отведай ещё этих французских булок"
 "#;
 
+const TEST9S: &str = r#"
+'First line\nSecond line'
+"#;
+
 #[cfg(test)]
 mod tests {
     #![allow(unused_imports)]
@@ -83,5 +87,11 @@ mod tests {
     fn test_parse_unicode_string() {
         let res = bund_parse(TEST8S).expect("Fail to parse BUND string");
         assert_eq!(res[0].cast_string().unwrap(), "Отведай ещё этих французских булок");
+    }
+
+    #[test]
+    fn test_parse_multiline_in_literal() {
+        let res = bund_parse(TEST9S).expect("Fail to parse BUND string");
+        assert_eq!(res[0].cast_string().unwrap(), r#"First line\nSecond line"#);
     }
 }
