@@ -25,8 +25,8 @@ string  = @{ "\"" ~ inner ~ "\"" }
 literal = @{ "'" ~ (!"'" ~ literal_element )* ~ "'" }
 atom    = @{ ":" ~ aelement+ ~ WHITESPACE+ }
 stack   = @{ "@" ~ LETTER+ ~ WHITESPACE+ }
-name    = @{ !"`" ~ element+ ~ WHITESPACE+ }
-ptr     = @{ "`" ~ element+ ~ WHITESPACE+ }
+name    = @{ !"`" ~ element ~ nelement* ~ WHITESPACE+ }
+ptr     = @{ "`" ~ element ~ nelement* ~ WHITESPACE+ }
 command = @{ cmd+ ~ WHITESPACE+ }
 lambda  = { "{" ~ term+ ~ "}" }
 list    = { "[" ~ term+ ~ "]" }
@@ -34,11 +34,12 @@ ctx     = { "(" ~ term+ ~ ")" }
 
 
 element = @{ ( LETTER | SYMBOL | "." | "," | "=" | ">" | "<" | "-" | "+" | "^" | "?" | "!" | "/" | "*" | "|" | "&" | "#" | "%" | "_" ) }
+nelement = @{ ( element | ASCII_DIGIT ) }
 aelement= @{ (ASCII_ALPHANUMERIC | LETTER) }
 literal_element= @{
                 ANY
               | "\\" ~ ("\"" | "\\" | "/" | "b" | "f" | "n" | "r" | "t")
-              | "\\" ~ ("u" ~ ASCII_HEX_DIGIT{4}) 
+              | "\\" ~ ("u" ~ ASCII_HEX_DIGIT{4})
 }
 cmd     = @{ ( ":" | ";" ) }
 inner   = @{ (!("\"" | "\\" | "\u{0000}" | "\u{001F}") ~ ANY)* ~ (escape ~ inner)? }

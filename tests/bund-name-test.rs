@@ -38,6 +38,14 @@ const TEST10N: &str = r#"
 HELLO_WORLD
 "#;
 
+const TEST11N: &str = r#"
+BASE64
+"#;
+
+const TEST12N: &str = r#"
+`BASE64
+"#;
+
 #[cfg(test)]
 mod tests {
     #![allow(unused_imports)]
@@ -88,6 +96,12 @@ mod tests {
     }
 
     #[test]
+    fn test_parse_ptr_2() {
+        let res = bund_parse(TEST12N).expect("Fail to parse BUND name");
+        assert_eq!(res[0].cast_string().unwrap(), "BASE64");
+    }
+
+    #[test]
     fn test_parse_command_1() {
         let res = bund_parse(TEST8N).expect("Fail to parse BUND name");
         assert_eq!(res[1].cast_string().unwrap(), ":");
@@ -109,6 +123,12 @@ mod tests {
     fn test_parse_name_with_undescore_symbol() {
         let res = bund_parse(TEST10N).expect("Fail to parse BUND name");
         assert_eq!(res[0].cast_string().unwrap(), "HELLO_WORLD");
+    }
+
+    #[test]
+    fn test_parse_name_with_number() {
+        let res = bund_parse(TEST11N).expect("Fail to parse BUND name");
+        assert_eq!(res[0].cast_string().unwrap(), "BASE64");
     }
 
 }
