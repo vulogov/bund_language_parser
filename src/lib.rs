@@ -34,3 +34,7 @@ pub fn bund_parse(source: &str) -> Result<Vec<Value>, Error> {
     }
     Ok(res)
 }
+
+pub fn version() -> String {
+    env!("CARGO_PKG_VERSION").to_string().clone()
+}
