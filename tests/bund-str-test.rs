@@ -34,6 +34,10 @@ const TEST9S: &str = r#"
 'First line\nSecond line'
 "#;
 
+const TEST10S: &str = r#"
+:TEST
+"#;
+
 #[cfg(test)]
 mod tests {
     #![allow(unused_imports)]
@@ -93,5 +97,11 @@ mod tests {
     fn test_parse_multiline_in_literal() {
         let res = bund_parse(TEST9S).expect("Fail to parse BUND string");
         assert_eq!(res[0].cast_string().unwrap(), r#"First line\nSecond line"#);
+    }
+
+    #[test]
+    fn test_parse_extra_spaces_in_atom() {
+        let res = bund_parse(TEST10S).expect("Fail to parse BUND string");
+        assert_eq!(res[0].cast_string().unwrap(), r#"TEST"#);
     }
 }
