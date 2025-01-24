@@ -38,6 +38,10 @@ const TEST10S: &str = r#"
 :TEST
 "#;
 
+const TEST11S: &str = r#"
+:TEST.TEST
+"#;
+
 #[cfg(test)]
 mod tests {
     #![allow(unused_imports)]
@@ -103,5 +107,11 @@ mod tests {
     fn test_parse_extra_spaces_in_atom() {
         let res = bund_parse(TEST10S).expect("Fail to parse BUND string");
         assert_eq!(res[0].cast_string().unwrap(), r#"TEST"#);
+    }
+
+    #[test]
+    fn test_parse_dot_in_atom() {
+        let res = bund_parse(TEST11S).expect("Fail to parse BUND string");
+        assert_eq!(res[0].cast_string().unwrap(), r#"TEST.TEST"#);
     }
 }

@@ -35,7 +35,7 @@ ctx     = { "(" ~ term+ ~ ")" }
 
 element = @{ ( LETTER | SYMBOL | "." | "," | "=" | ">" | "<" | "-" | "+" | "^" | "?" | "!" | "/" | "*" | "|" | "&" | "#" | "%" | "_" ) }
 nelement = @{ ( element | ASCII_DIGIT ) }
-aelement= @{ (ASCII_ALPHANUMERIC | LETTER) }
+aelement= @{ (ASCII_ALPHANUMERIC | LETTER | "." ) }
 literal_element= @{
                 ANY
               | "\\" ~ ("\"" | "\\" | "/" | "b" | "f" | "n" | "r" | "t")
