@@ -42,6 +42,10 @@ const TEST11S: &str = r#"
 :TEST.TEST
 "#;
 
+const TEST12S: &str = r#"
+:TEST_TEST
+"#;
+
 #[cfg(test)]
 mod tests {
     #![allow(unused_imports)]
@@ -113,5 +117,11 @@ mod tests {
     fn test_parse_dot_in_atom() {
         let res = bund_parse(TEST11S).expect("Fail to parse BUND string");
         assert_eq!(res[0].cast_string().unwrap(), r#"TEST.TEST"#);
+    }
+
+    #[test]
+    fn test_parse_underscore_in_atom() {
+        let res = bund_parse(TEST12S).expect("Fail to parse BUND string");
+        assert_eq!(res[0].cast_string().unwrap(), r#"TEST_TEST"#);
     }
 }
