@@ -42,6 +42,10 @@ const TEST11N: &str = r#"
 BASE64
 "#;
 
+const TEST13N: &str = r#"
+-==-
+"#;
+
 const TEST12N: &str = r#"
 `BASE64
 "#;
@@ -87,6 +91,12 @@ mod tests {
     fn test_parse_name_4() {
         let res = bund_parse(TEST6N).expect("Fail to parse BUND name");
         assert_eq!(res[1].cast_string().unwrap(), "-WORLD");
+    }
+
+    #[test]
+    fn test_parse_name_5() {
+        let res = bund_parse(TEST13N).expect("Fail to parse BUND name");
+        assert_eq!(res[0].cast_string().unwrap(), "-==-");
     }
 
     #[test]

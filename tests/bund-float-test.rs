@@ -7,6 +7,10 @@ const TEST2F: &str = r#"
 41 42.0 43
 "#;
 
+const TEST3F: &str = r#"
+-42.0
+"#;
+
 #[cfg(test)]
 mod tests {
     #![allow(unused_imports)]
@@ -15,9 +19,14 @@ mod tests {
     use rust_dynamic::value::Value;
 
     #[test]
-    fn test_parse_single_float() {
+    fn test_parse_single_float1() {
         let res = bund_parse(TEST1F).expect("Fail to parse BUND number");
         assert_eq!(res[0].cast_float().unwrap(), 42 as f64);
+    }
+    #[test]
+    fn test_parse_single_float2() {
+        let res = bund_parse(TEST3F).expect("Fail to parse BUND number");
+        assert_eq!(res[0].cast_float().unwrap(), -42 as f64);
     }
     #[test]
     fn test_parse_multiple_float0() {

@@ -2,6 +2,10 @@ const TEST1I: &str = r#"
 42
 "#;
 
+const TEST4I: &str = r#"
+-42
+"#;
+
 const TEST2I: &str = r#"
 // Three integers
 41 42 43
@@ -23,6 +27,11 @@ mod tests {
     fn test_parse_single_int() {
         let res = bund_parse(TEST1I).expect("Fail to parse BUND number");
         assert_eq!(res[0].cast_int().unwrap(), 42 as i64);
+    }
+    #[test]
+    fn test_parse_single_negative_int() {
+        let res = bund_parse(TEST4I).expect("Fail to parse BUND number");
+        assert_eq!(res[0].cast_int().unwrap(), -42 as i64);
     }
     #[test]
     fn test_parse_multiple_int0() {

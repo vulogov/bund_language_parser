@@ -5,6 +5,8 @@ terms = _{ term* }
 term = _{ value }
 
 value   = _{
+  float |
+  integer |
   lambda |
   list |
   ctx |
@@ -14,18 +16,16 @@ value   = _{
   atom |
   stack |
   string |
-  literal |
-  float |
-  integer
+  literal 
 }
 
-integer = @{ ("+" | "-")? ~ int  }
+integer = @{ ("+" | "-")? ~ int }
 float   = @{ ("+" | "-")? ~ int ~ "." ~ ( digits ~ exp? | exp)? }
 string  = @{ "\"" ~ inner ~ "\"" }
 literal = @{ "'" ~ (!"'" ~ literal_element )* ~ "'" }
 atom    = @{ ":" ~ aelement+ ~ WHITESPACE+ }
 stack   = @{ "@" ~ LETTER+ ~ WHITESPACE+ }
-name    = @{ !"`" ~ element ~ nelement* ~ WHITESPACE+ }
+name    = @{ !("`") ~ element ~ nelement* ~ WHITESPACE+ }
 ptr     = @{ "`" ~ element ~ nelement* ~ WHITESPACE+ }
 command = @{ cmd+ ~ WHITESPACE+ }
 lambda  = { "{" ~ term+ ~ "}" }
