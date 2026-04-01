@@ -1,9 +1,10 @@
 extern crate pest;
-use pest::{Parser};
+use easy_error::{bail, Error};
+use pest::Parser;
 use pest_derive::*;
-use easy_error::{Error, bail};
 use rust_dynamic::value::Value;
 
+pub mod compile;
 pub mod parse;
 pub mod vm;
 
@@ -26,7 +27,6 @@ pub fn bund_parse(source: &str) -> Result<Vec<Value>, Error> {
                     }
                 }
             }
-
         }
         Err(err) => {
             bail!("{}", err);
